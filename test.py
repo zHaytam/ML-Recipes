@@ -38,9 +38,16 @@ def test_simple_linear_regression():
     points = np.genfromtxt('data/cricket_chirps_vs_temperature.txt',
                            dtype=float, delimiter=';')
 
+    training_points = points[:10]
+    testing_points = points[10:]
     slr = SimpleLinearRegression()
-    slr.fit(points)
-    print(slr.predict(20))
+    slr.fit(training_points, False)
+
+    testing_points_t = testing_points.T
+    x_values = testing_points_t[0]
+    y_values = testing_points_t[1]
+    print("Predicted:", slr.predict(x_values))
+    print("Observed:", y_values)
 
 
 # tests

@@ -19,8 +19,9 @@ class SimpleLinearRegression:
         if not train_points.any():
             raise ValueError('Cannot work with an empty training data.')
 
-        if train_points.ndim != 2:
-            raise ValueError('The training data array must be a 2d ndarray.')
+        if train_points.ndim != 2 or train_points.shape[1] != 2:
+            raise ValueError(
+                'The training data array must be a 2d numpy array of points [x, y].')
 
         train_points_t = train_points.T
         x_points = train_points_t[0]
@@ -34,17 +35,17 @@ class SimpleLinearRegression:
         self.slope = (y_sd / x_sd) * corr
         self.intercept = y_mean - (self.slope * x_mean)
 
-    def predict(self, x_value):
+    def predict(self, x_values):
         """
-        Returns a predicted value (y) of a x value using the simple linear regression equation
+        Returns the predicted values (y's) of the X values using the simple linear regression equation
             :param self: ~
-            :param x_value: The x value to feed to the equation
+            :param x_value: A 2d numpy array (or a single value)
         """
 
         if self.slope is None or self.intercept is None:
             raise ValueError('No training data, call fit first.')
 
-        return self.intercept + (self.slope * x_value)
+        return self.intercept + (self.slope * x_values)
 
     def __calculate_correlation(self, x_points, y_points, x_mean, y_mean, x_sd, y_sd):
         """
