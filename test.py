@@ -1,8 +1,11 @@
+import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from ml_recipes.classifiers.nearest_neighbour import NearestNeighbourClassifier
 from ml_recipes.classifiers.k_nearest_neighbors import KNearestNeighborsClassifier
+from ml_recipes.linear_model.simple_linear_regression import SimpleLinearRegression
+# from ml_recipes.ml_utils import std
 
 IRIS_DATASET = datasets.load_iris()
 FEATURES = IRIS_DATASET.data
@@ -31,5 +34,16 @@ def test_on_iris():
     test_on_iris_knn(x_train, x_test, y_train, y_test)
 
 
+def test_simple_linear_regression():
+    points = np.genfromtxt('data/cricket_chirps_vs_temperature.txt',
+                           dtype=float, delimiter=';')
+
+    slr = SimpleLinearRegression()
+    slr.fit(points)
+    print(slr.predict(20))
+
+
 # tests
-test_on_iris()
+# test_on_iris()
+# print(std(np.array([1, 2, 3, 4, 5])))
+test_simple_linear_regression()

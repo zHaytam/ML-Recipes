@@ -15,6 +15,7 @@ class KNearestNeighborsClassifier:
             :param x_train: The features of the training data
             :param y_train: The labels of the training data
         """
+
         if len(x_train) != len(y_train):
             raise ValueError(
                 'The length of the training data (X and Y) must be the same.')
@@ -28,10 +29,11 @@ class KNearestNeighborsClassifier:
     def predict(self, x_test, k=3):
         """
         Returns an array of the predicted labels for the test data
-            :param self: 
+            :param self: ~
             :param x_test: The test features
             :param k: The number of neighbors to take in consideration
         """
+
         if not self.x_train.any() or not self.y_train.any():
             raise ValueError('Invalid training data.')
 
@@ -51,9 +53,10 @@ class KNearestNeighborsClassifier:
     def __get_sorted_distances(self, x_row):
         """
         Returns a sorted array of the distances and the labels they represent
-            :param self: 
+            :param self: ~
             :param x_row: The point (features)
         """
+
         distances = []
 
         for n in range(0, len(self.x_train)):
